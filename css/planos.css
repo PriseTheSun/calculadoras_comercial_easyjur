@@ -88,3 +88,40 @@ input:checked + .slider:before {
     opacity: 1;
   }
 }
+
+/* Estilos para impressão */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #configuracao-plano,
+  #configuracao-plano * {
+    visibility: visible;
+  }
+  #configuracao-plano {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+  .no-print {
+    display: none !important;
+  }
+
+  /* Estilos para impressão normal (fallback) */
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+  .bg-gray-50 {
+    background: white !important;
+  }
+  .shadow-lg {
+    box-shadow: none !important;
+  }
+  .rounded-lg {
+    border-radius: 0 !important;
+  }
+}

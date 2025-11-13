@@ -268,12 +268,21 @@
         id="configuracao-plano"
         class="hidden mt-12 bg-white rounded-lg shadow-lg p-6"
       >
-        <h3
-          id="titulo-configuracao"
-          class="text-2xl font-bold easyjur-text-dark mb-6"
-        >
-          Configuração do Plano
-        </h3>
+        <div class="flex justify-between items-center mb-6">
+          <h3
+            id="titulo-configuracao"
+            class="text-2xl font-bold easyjur-text-dark"
+          >
+            Configuração do Plano
+          </h3>
+          <button
+            id="botao-imprimir"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 no-print flex items-center"
+          >
+            <i class="fas fa-print mr-2"></i>
+            Imprimir
+          </button>
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Coluna de Configurações -->
