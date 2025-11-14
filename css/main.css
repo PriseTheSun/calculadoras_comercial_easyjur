@@ -106,21 +106,3 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(26px);
 }
-
-.recomendacao-verde {
-  background-color: #f0fff4;
-  border: 1px solid #9ae6b4;
-  color: #22543d;
-}
-
-.recomendacao-amarelo {
-  background-color: #fffbeb;
-  border: 1px solid #fbd38d;
-  color: #744210;
-}
-
-.recomendacao-azul {
-  background-color: #ebf8ff;
-  border: 1px solid #90cdf4;
-  color: #1a365d;
-}

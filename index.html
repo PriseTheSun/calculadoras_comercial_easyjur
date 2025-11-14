@@ -12,7 +12,6 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/planos.css" />
   </head>
@@ -33,7 +32,6 @@
         <p class="text-center easyjur-gray-dark mb-6">
           Sistema de cálculo de planos para escritórios de advocacia
         </p>
-
         <!-- Navbar -->
         <nav class="flex justify-center border-b easyjur-gray-light">
           <button
@@ -70,7 +68,6 @@
           <h2 class="text-2xl font-bold easyjur-black mb-6">
             Escolha seu Plano
           </h2>
-
           <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
           >
@@ -83,7 +80,6 @@
               <p class="text-3xl font-bold easyjur-black mb-4">
                 R$ 389<span class="text-sm font-normal easyjur-gray">/mês</span>
               </p>
-
               <ul class="space-y-2 mb-6">
                 <li class="flex items-start">
                   <svg
@@ -171,7 +167,6 @@
                   <span class="easyjur-black">Implantação: R$ 600</span>
                 </li>
               </ul>
-
               <button
                 class="w-full py-3 px-4 easyjur-bg-green text-white font-medium rounded-md hover:bg-green-600 transition-colors calculate-plan-btn"
               >
@@ -188,7 +183,6 @@
               <p class="text-3xl font-bold easyjur-black mb-4">
                 R$ 599<span class="text-sm font-normal easyjur-gray">/mês</span>
               </p>
-
               <ul class="space-y-2 mb-6">
                 <li class="flex items-start">
                   <svg
@@ -276,7 +270,6 @@
                   <span class="easyjur-black">Implantação: R$ 1.990</span>
                 </li>
               </ul>
-
               <button
                 class="w-full py-3 px-4 easyjur-bg-green text-white font-medium rounded-md hover:bg-green-600 transition-colors calculate-plan-btn"
               >
@@ -295,7 +288,6 @@
                   >/mês</span
                 >
               </p>
-
               <ul class="space-y-2 mb-6">
                 <li class="flex items-start">
                   <svg
@@ -383,7 +375,6 @@
                   <span class="easyjur-black">Implantação: R$ 3.990</span>
                 </li>
               </ul>
-
               <button
                 class="w-full py-3 px-4 easyjur-bg-green text-white font-medium rounded-md hover:bg-green-600 transition-colors calculate-plan-btn"
               >
@@ -402,7 +393,6 @@
                   >/mês</span
                 >
               </p>
-
               <ul class="space-y-2 mb-6">
                 <li class="flex items-start">
                   <svg
@@ -490,7 +480,6 @@
                   <span class="easyjur-black">Implantação: R$ 3.990</span>
                 </li>
               </ul>
-
               <button
                 class="w-full py-3 px-4 easyjur-bg-green text-white font-medium rounded-md hover:bg-green-600 transition-colors calculate-plan-btn"
               >
@@ -507,7 +496,6 @@
             >
               Configuração do Plano
             </h3>
-
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <!-- Configuração do Plano -->
               <div class="bg-white rounded-lg shadow-md p-6">
@@ -523,6 +511,7 @@
                       id="usuarios-adicionais"
                       min="0"
                       max="500"
+                      maxlength="10"
                       value="0"
                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     />
@@ -530,7 +519,6 @@
                       Valor por usuário: R$ 60
                     </p>
                   </div>
-
                   <div>
                     <label
                       class="block easyjur-black font-medium mb-2"
@@ -549,7 +537,6 @@
                       R$ 30 a cada 100 pushs (EX: 1 = 100 Pushs)
                     </p>
                   </div>
-
                   <div>
                     <label
                       class="block easyjur-black font-medium mb-2"
@@ -561,6 +548,7 @@
                       id="oabs-adicionais"
                       min="0"
                       max="500"
+                      maxlength="10"
                       value="0"
                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     />
@@ -568,7 +556,6 @@
                       R$ 60 por OAB adicional
                     </p>
                   </div>
-
                   <div>
                     <label
                       class="block easyjur-black font-medium mb-2"
@@ -580,6 +567,7 @@
                       id="ged-adicional"
                       min="0"
                       max="500"
+                      maxlength="10"
                       value="0"
                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     />
@@ -587,7 +575,6 @@
                       R$ 8 por GB adicional
                     </p>
                   </div>
-
                   <div>
                     <label
                       class="block easyjur-black font-medium mb-2"
@@ -604,7 +591,6 @@
                       <option value="119">100Mil tokens: R$119,00</option>
                     </select>
                   </div>
-
                   <div class="pt-2">
                     <label class="block easyjur-black font-medium mb-3"
                       >Habilitar captura de processos</label
@@ -622,7 +608,6 @@
                       Valor: R$ 1,50 por processo (até 499) ou R$ 1,00 (500+)
                     </p>
                   </div>
-
                   <div id="captura-processos-container" class="hidden">
                     <label
                       class="block easyjur-black font-medium mb-2"
@@ -646,7 +631,6 @@
                 <h3 class="text-xl font-bold easyjur-black mb-6">
                   Resumo do Plano
                 </h3>
-
                 <div class="space-y-1">
                   <div class="summary-item">
                     <span class="easyjur-black">Valor plano base:</span>
@@ -654,49 +638,42 @@
                       >R$ 0,00</span
                     >
                   </div>
-
                   <div class="summary-item">
                     <span class="easyjur-black">Usuários adicionais:</span>
                     <span id="valor-usuarios-adicionais" class="font-medium"
                       >R$ 0,00</span
                     >
                   </div>
-
                   <div class="summary-item">
                     <span class="easyjur-black">Pushs adicionais:</span>
                     <span id="valor-pushs-adicionais" class="font-medium"
                       >R$ 0,00</span
                     >
                   </div>
-
                   <div class="summary-item">
                     <span class="easyjur-black">OABs adicionais:</span>
                     <span id="valor-oabs-adicionais" class="font-medium"
                       >R$ 0,00</span
                     >
                   </div>
-
                   <div class="summary-item">
                     <span class="easyjur-black">GED adicional:</span>
                     <span id="valor-ged-adicional" class="font-medium"
                       >R$ 0,00</span
                     >
                   </div>
-
                   <div class="summary-item">
                     <span class="easyjur-black">JurisAI Tokens:</span>
                     <span id="valor-jurisai-tokens" class="font-medium"
                       >R$ 0,00</span
                     >
                   </div>
-
                   <div class="summary-item">
                     <span class="easyjur-black">Captura de processos:</span>
                     <span id="valor-captura-processos" class="font-medium"
                       >R$ 0,00</span
                     >
                   </div>
-
                   <div class="summary-total">
                     <span class="easyjur-black font-bold text-lg"
                       >Valor total mensal:</span
@@ -707,7 +684,6 @@
                       >R$ 0,00</span
                     >
                   </div>
-
                   <div class="summary-item pt-4">
                     <span class="easyjur-black font-medium"
                       >Pagamento único (implantação):</span
@@ -716,23 +692,13 @@
                       >R$ 0,00</span
                     >
                   </div>
-
-                  <!-- Nova seção de recomendação -->
-                  <div
-                    id="recomendacao-plano"
-                    class="mt-6 p-4 rounded-lg hidden"
-                  >
-                    <h4 class="font-bold text-lg mb-2">
-                      Recomendação de Plano
-                    </h4>
-                    <p id="recomendacao-texto" class="text-sm"></p>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Outras abas permanecem iguais -->
         <!-- Tab: Cálculo Migração -->
         <div id="migracao" class="tab-content hidden">
           <h2 class="text-2xl font-bold easyjur-black mb-6">

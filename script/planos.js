@@ -65,68 +65,6 @@ $(document).ready(function () {
       updatePlanSummary();
     }
   });
-  // Função para calcular recomendação de plano
-  function calcularRecomendacaoPlano(valorTotalMensal) {
-    const planosHierarquia = ["premium", "standard", "growth", "growth-plus"];
-
-    // 1. Encontrar o primeiro plano onde o valor total cabe
-    let planoRecomendado = null;
-
-    for (const plano of planosHierarquia) {
-      if (valorTotalMensal <= planData[plano].basePrice) {
-        planoRecomendado = plano;
-        break;
-      }
-    }
-
-    // 2. Caso nenhum plano atenda → excedeu todos
-    if (!planoRecomendado) {
-      return {
-        tipo: "recomendado",
-        mensagem: `Seu uso ultrapassa o maior plano disponível. Recomendamos um plano customizado.`,
-        cor: "azul",
-      };
-    }
-
-    const precoPlano = planData[planoRecomendado].basePrice;
-    const percentual = valorTotalMensal / precoPlano;
-
-    let cor = "";
-    let mensagem = "";
-
-    // 3. Caso especial: último plano
-    if (planoRecomendado === "growth-plus") {
-      if (percentual < 1.0) {
-        cor = "verde";
-        mensagem = `O plano ${planData[planoRecomendado].name} é adequado para o seu uso.`;
-      } else {
-        cor = "azul";
-        mensagem = `Você ultrapassou o maior plano. Considere um plano customizado.`;
-      }
-    } else {
-      if (percentual < 0.8) {
-        cor = "verde";
-        mensagem = `O plano ${planData[planoRecomendado].name} é ideal para o seu uso atual.`;
-      } else if (percentual < 0.95) {
-        cor = "amarelo";
-        mensagem = `O plano ${planData[planoRecomendado].name} atende, mas seu uso está próximo do limite.`;
-      } else {
-        cor = "azul";
-        mensagem = `Recomendamos considerar o próximo plano: seu uso está quase no limite.`;
-      }
-    }
-
-    return {
-      tipo:
-        cor === "verde"
-          ? "ideal"
-          : cor === "amarelo"
-          ? "atencao"
-          : "recomendado",
-      mensagem,
-      cor,
-    };
-  }
 
   // Função para atualizar o resumo do plano
   function updatePlanSummary() {
@@ -185,20 +123,6 @@ $(document).ready(function () {
     );
     $("#valor-total-mensal").text(`R$ ${valorTotalMensal.toFixed(2)}`);
     $("#valor-adicionais").text(`R$ ${valorAdicionais.toFixed(2)}`);
-
-    // Calcular e exibir recomendação
-    const recomendacao = calcularRecomendacaoPlano(valorTotalMensal);
-    const elementoRecomendacao = $("#recomendacao-plano");
-    const textoRecomendacao = $("#recomendacao-texto");
-
-    elementoRecomendacao
-      .removeClass("hidden")
-      .removeClass("recomendacao-verde")
-      .removeClass("recomendacao-amarelo")
-      .removeClass("recomendacao-azul")
-      .addClass(`recomendacao-${recomendacao.cor}`);
-
-    textoRecomendacao.text(recomendacao.mensagem);
   }
 
   // Habilitar/desabilitar campo de quantidade de processos
