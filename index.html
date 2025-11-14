@@ -3,378 +3,828 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculadoras EasyJur Comercial</title>
+    <title>EasyJur - Sistema de Cálculo de Planos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/planos.css" />
-    <link
-      rel="shortcut icon"
-      href="imagens/favicon-easyjur.svg"
-      type="image/x-icon"
-    />
   </head>
-
-  <body class="bg-gray-50">
-    <!-- Header/Navbar -->
-    <header class="bg-white shadow-md">
-      <div
-        class="container mx-auto px-4 py-3 flex justify-between items-center"
-      >
-        <div class="flex items-center">
-          <h1 class="text-2xl font-bold easyjur-text-primary">
-            <a href="index.html">
-              <img
-                src="imagens/logo-calculadoras.png"
-                class="w-[180px]"
-                alt="Logo Calculadoras EasyJur"
-                srcset=""
-              />
-            </a>
-          </h1>
-        </div>
-        <nav class="hidden md:flex space-x-6">
-          <a
-            href="pagina/planos.html"
-            class="nav-link easyjur-text-dark font-medium"
-            data-page="planos"
-            >Planos</a
-          >
-          <a
-            href="pagina/migracao.html"
-            class="nav-link easyjur-text-gray font-medium"
-            data-page="migracao"
-            >Cálculo Migração</a
-          >
-          <a
-            href="#"
-            class="nav-link easyjur-text-gray font-medium"
-            data-page="roi"
-            >Cálculo ROI</a
-          >
-        </nav>
-        <div class="md:hidden">
-          <button id="mobile-menu-button" class="text-gray-600">
-            <i class="fas fa-bars text-xl"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Mobile Menu -->
-      <div
-        id="mobile-menu"
-        class="hidden md:hidden bg-white py-2 px-4 shadow-lg"
-      >
-        <a
-          href="#"
-          class="block py-2 nav-link easyjur-text-dark font-medium"
-          data-page="planos"
-          >Planos</a
+  <body class="bg-gray-50 easyjur-container">
+    <div class="container mx-auto px-4 py-8">
+      <!-- Header -->
+      <header class="mb-8">
+        <h1
+          class="text-3xl font-bold easyjur-black text-center mb-2 flex justify-center items-center gap-4"
         >
-        <a
-          href="pagina/migracao.html"
-          class="block py-2 nav-link easyjur-text-gray font-medium"
-          data-page="migracao"
-          >Cálculo Migração</a
-        >
-        <a
-          href="#"
-          class="block py-2 nav-link easyjur-text-gray font-medium"
-          data-page="roi"
-          >Cálculo ROI</a
-        >
-      </div>
-    </header>
-
-    <main class="container mx-auto px-4 py-8">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold easyjur-text-dark mb-4">
-          Calculadoras EasyJur
-        </h2>
-        <p class="text-xl easyjur-text-gray max-w-2xl mx-auto">
-          Ferramentas inteligentes para ajudar seu escritório a tomar as
-          melhores decisões comerciais.
+          <img
+            src="assets/images/logo-calculadoras.png"
+            alt="logomarca easyjur"
+            class="w-32 h-auto"
+            srcset=""
+          />
+        </h1>
+        <p class="text-center easyjur-gray-dark mb-6">
+          Sistema de cálculo de planos para escritórios de advocacia
         </p>
-      </div>
 
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
-      >
-        <!-- Card Planos -->
-        <div class="service-card bg-white rounded-lg shadow-lg p-6">
-          <div class="card-content">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-12 h-12 rounded-full easyjur-bg-primary flex items-center justify-center mr-4"
+        <!-- Navbar -->
+        <nav class="flex justify-center border-b easyjur-gray-light">
+          <button
+            class="tab-btn py-3 px-6 easyjur-gray-dark font-medium hover:text-gray-800 transition-colors tab-active"
+            data-tab="planos"
+          >
+            Planos
+          </button>
+          <button
+            class="tab-btn py-3 px-6 easyjur-gray-dark font-medium hover:text-gray-800 transition-colors"
+            data-tab="migracao"
+          >
+            Cálculo Migração
+          </button>
+          <button
+            class="tab-btn py-3 px-6 easyjur-gray-dark font-medium hover:text-gray-800 transition-colors"
+            data-tab="roi"
+          >
+            Cálculo ROI
+          </button>
+          <button
+            class="tab-btn py-3 px-6 easyjur-gray-dark font-medium hover:text-gray-800 transition-colors"
+            data-tab="resumo"
+          >
+            Resumo
+          </button>
+        </nav>
+      </header>
+
+      <!-- Main Content -->
+      <main>
+        <!-- Tab: Planos -->
+        <div id="planos" class="tab-content">
+          <h2 class="text-2xl font-bold easyjur-black mb-6">
+            Escolha seu Plano
+          </h2>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+          >
+            <!-- Premium Card -->
+            <div
+              class="plan-card bg-white rounded-lg shadow-md p-6"
+              data-plan="premium"
+            >
+              <h3 class="text-xl font-bold easyjur-black mb-4">Premium</h3>
+              <p class="text-3xl font-bold easyjur-black mb-4">
+                R$ 389<span class="text-sm font-normal easyjur-gray">/mês</span>
+              </p>
+
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">5 usuários inclusos</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">300 pushs</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">1 OAB</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">GED 30 GB</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">Implantação: R$ 600</span>
+                </li>
+              </ul>
+
+              <button
+                class="w-full py-3 px-4 easyjur-bg-green text-white font-medium rounded-md hover:bg-green-600 transition-colors calculate-plan-btn"
               >
-                <i class="fas fa-calculator text-white text-xl"></i>
-              </div>
-              <h3 class="text-2xl font-bold easyjur-text-dark">
-                Calculadora de Planos
-              </h3>
+                Calcular Plano
+              </button>
             </div>
 
-            <div class="card-description">
-              <p class="easyjur-text-gray mb-6 leading-relaxed">
-                Compare e calcule o custo-benefício dos diferentes planos
-                EasyJur. Personalize conforme as necessidades do seu escritório
-                e visualize o investimento mensal de forma clara e detalhada.
+            <!-- Standard Card -->
+            <div
+              class="plan-card bg-white rounded-lg shadow-md p-6"
+              data-plan="standard"
+            >
+              <h3 class="text-xl font-bold easyjur-black mb-4">Standard</h3>
+              <p class="text-3xl font-bold easyjur-black mb-4">
+                R$ 599<span class="text-sm font-normal easyjur-gray">/mês</span>
+              </p>
+
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">10 usuários inclusos</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">800 pushs</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">2 OABs</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">GED 40 GB</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">Implantação: R$ 1.990</span>
+                </li>
+              </ul>
+
+              <button
+                class="w-full py-3 px-4 easyjur-bg-green text-white font-medium rounded-md hover:bg-green-600 transition-colors calculate-plan-btn"
+              >
+                Calcular Plano
+              </button>
+            </div>
+
+            <!-- Growth Card -->
+            <div
+              class="plan-card bg-white rounded-lg shadow-md p-6"
+              data-plan="growth"
+            >
+              <h3 class="text-xl font-bold easyjur-black mb-4">Growth</h3>
+              <p class="text-3xl font-bold easyjur-black mb-4">
+                R$ 1.699<span class="text-sm font-normal easyjur-gray"
+                  >/mês</span
+                >
+              </p>
+
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">15 usuários inclusos</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">2.000 pushs</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">3 OABs</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">GED 80 GB</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">Implantação: R$ 3.990</span>
+                </li>
+              </ul>
+
+              <button
+                class="w-full py-3 px-4 easyjur-bg-green text-white font-medium rounded-md hover:bg-green-600 transition-colors calculate-plan-btn"
+              >
+                Calcular Plano
+              </button>
+            </div>
+
+            <!-- Growth Plus Card -->
+            <div
+              class="plan-card bg-white rounded-lg shadow-md p-6"
+              data-plan="growth-plus"
+            >
+              <h3 class="text-xl font-bold easyjur-black mb-4">Growth Plus</h3>
+              <p class="text-3xl font-bold easyjur-black mb-4">
+                R$ 2.799<span class="text-sm font-normal easyjur-gray"
+                  >/mês</span
+                >
+              </p>
+
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">30 usuários inclusos</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">4.000 pushs</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">5 OABs</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">GED 200 GB</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 easyjur-green mr-2 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="easyjur-black">Implantação: R$ 3.990</span>
+                </li>
+              </ul>
+
+              <button
+                class="w-full py-3 px-4 easyjur-bg-green text-white font-medium rounded-md hover:bg-green-600 transition-colors calculate-plan-btn"
+              >
+                Calcular Plano
+              </button>
+            </div>
+          </div>
+
+          <!-- Configuração do Plano e Resumo -->
+          <div id="plan-configuration-container" class="hidden">
+            <h3
+              id="plan-config-title"
+              class="text-xl font-bold easyjur-black mb-6"
+            >
+              Configuração do Plano
+            </h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <!-- Configuração do Plano -->
+              <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="space-y-6">
+                  <div>
+                    <label
+                      class="block easyjur-black font-medium mb-2"
+                      for="usuarios-adicionais"
+                      >Usuários adicionais</label
+                    >
+                    <input
+                      type="number"
+                      id="usuarios-adicionais"
+                      min="0"
+                      max="500"
+                      value="0"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    />
+                    <p id="valor-usuario" class="text-sm easyjur-gray mt-2">
+                      Valor por usuário: R$ 60
+                    </p>
+                  </div>
+
+                  <div>
+                    <label
+                      class="block easyjur-black font-medium mb-2"
+                      for="pushs-adicionais"
+                      >Pushs adicionais (pacotes de 100)</label
+                    >
+                    <input
+                      type="number"
+                      id="pushs-adicionais"
+                      min="0"
+                      max="500"
+                      value="0"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    />
+                    <p class="text-sm easyjur-gray mt-2">
+                      R$ 30 a cada 100 pushs (EX: 1 = 100 Pushs)
+                    </p>
+                  </div>
+
+                  <div>
+                    <label
+                      class="block easyjur-black font-medium mb-2"
+                      for="oabs-adicionais"
+                      >OABs adicionais</label
+                    >
+                    <input
+                      type="number"
+                      id="oabs-adicionais"
+                      min="0"
+                      max="500"
+                      value="0"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    />
+                    <p class="text-sm easyjur-gray mt-2">
+                      R$ 60 por OAB adicional
+                    </p>
+                  </div>
+
+                  <div>
+                    <label
+                      class="block easyjur-black font-medium mb-2"
+                      for="ged-adicional"
+                      >GED adicional (GB)</label
+                    >
+                    <input
+                      type="number"
+                      id="ged-adicional"
+                      min="0"
+                      max="500"
+                      value="0"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    />
+                    <p class="text-sm easyjur-gray mt-2">
+                      R$ 8 por GB adicional
+                    </p>
+                  </div>
+
+                  <div>
+                    <label
+                      class="block easyjur-black font-medium mb-2"
+                      for="jurisai-tokens"
+                      >JurisAI Tokens Extra</label
+                    >
+                    <select
+                      id="jurisai-tokens"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    >
+                      <option value="0">Nenhum</option>
+                      <option value="39">30Mil tokens: R$39,00</option>
+                      <option value="62">50Mil tokens: R$62,00</option>
+                      <option value="119">100Mil tokens: R$119,00</option>
+                    </select>
+                  </div>
+
+                  <div class="pt-2">
+                    <label class="block easyjur-black font-medium mb-3"
+                      >Habilitar captura de processos</label
+                    >
+                    <div class="flex items-center">
+                      <label class="switch">
+                        <input type="checkbox" id="captura-processos" />
+                        <span class="slider"></span>
+                      </label>
+                      <span class="ml-3 easyjur-black"
+                        >Ativar captura de processos</span
+                      >
+                    </div>
+                    <p class="text-sm easyjur-gray mt-2">
+                      Valor: R$ 1,50 por processo (até 499) ou R$ 1,00 (500+)
+                    </p>
+                  </div>
+
+                  <div id="captura-processos-container" class="hidden">
+                    <label
+                      class="block easyjur-black font-medium mb-2"
+                      for="processos-quantidade"
+                      >Quantidade de processos</label
+                    >
+                    <input
+                      type="number"
+                      id="processos-quantidade"
+                      min="0"
+                      max="9999"
+                      value="0"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Resumo do Plano -->
+              <div class="bg-gray-100 rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-bold easyjur-black mb-6">
+                  Resumo do Plano
+                </h3>
+
+                <div class="space-y-1">
+                  <div class="summary-item">
+                    <span class="easyjur-black">Valor plano base:</span>
+                    <span id="valor-plano-base" class="font-medium"
+                      >R$ 0,00</span
+                    >
+                  </div>
+
+                  <div class="summary-item">
+                    <span class="easyjur-black">Usuários adicionais:</span>
+                    <span id="valor-usuarios-adicionais" class="font-medium"
+                      >R$ 0,00</span
+                    >
+                  </div>
+
+                  <div class="summary-item">
+                    <span class="easyjur-black">Pushs adicionais:</span>
+                    <span id="valor-pushs-adicionais" class="font-medium"
+                      >R$ 0,00</span
+                    >
+                  </div>
+
+                  <div class="summary-item">
+                    <span class="easyjur-black">OABs adicionais:</span>
+                    <span id="valor-oabs-adicionais" class="font-medium"
+                      >R$ 0,00</span
+                    >
+                  </div>
+
+                  <div class="summary-item">
+                    <span class="easyjur-black">GED adicional:</span>
+                    <span id="valor-ged-adicional" class="font-medium"
+                      >R$ 0,00</span
+                    >
+                  </div>
+
+                  <div class="summary-item">
+                    <span class="easyjur-black">JurisAI Tokens:</span>
+                    <span id="valor-jurisai-tokens" class="font-medium"
+                      >R$ 0,00</span
+                    >
+                  </div>
+
+                  <div class="summary-item">
+                    <span class="easyjur-black">Captura de processos:</span>
+                    <span id="valor-captura-processos" class="font-medium"
+                      >R$ 0,00</span
+                    >
+                  </div>
+
+                  <div class="summary-total">
+                    <span class="easyjur-black font-bold text-lg"
+                      >Valor total mensal:</span
+                    >
+                    <span
+                      id="valor-total-mensal"
+                      class="font-bold text-xl easyjur-red"
+                      >R$ 0,00</span
+                    >
+                  </div>
+
+                  <div class="summary-item pt-4">
+                    <span class="easyjur-black font-medium"
+                      >Pagamento único (implantação):</span
+                    >
+                    <span id="valor-adicionais" class="font-medium"
+                      >R$ 0,00</span
+                    >
+                  </div>
+
+                  <!-- Nova seção de recomendação -->
+                  <div
+                    id="recomendacao-plano"
+                    class="mt-6 p-4 rounded-lg hidden"
+                  >
+                    <h4 class="font-bold text-lg mb-2">
+                      Recomendação de Plano
+                    </h4>
+                    <p id="recomendacao-texto" class="text-sm"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Cálculo Migração -->
+        <div id="migracao" class="tab-content hidden">
+          <h2 class="text-2xl font-bold easyjur-black mb-6">
+            Cálculo de Migração
+          </h2>
+          <div class="bg-white rounded-lg shadow-md p-8 text-center">
+            <div class="max-w-md mx-auto">
+              <svg
+                class="w-16 h-16 easyjur-gray mx-auto mb-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                ></path>
+              </svg>
+              <h3 class="text-xl font-bold easyjur-black mb-2">
+                Em Desenvolvimento
+              </h3>
+              <p class="easyjur-gray">
+                Esta funcionalidade estará disponível em breve.
               </p>
             </div>
-
-            <div class="card-footer">
-              <div class="flex justify-between items-center">
-                <span class="text-sm easyjur-text-gray">
-                  <i class="fas fa-clock mr-1"></i>
-                  2 min para calcular
-                </span>
-                <a
-                  href="pagina/planos.html"
-                  class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg transition duration-200 flex items-center"
-                >
-                  Ir <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
 
-        <!-- Card Migração -->
-        <div class="service-card bg-white rounded-lg shadow-lg p-6">
-          <div class="card-content">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-12 h-12 rounded-full easyjur-bg-primary flex items-center justify-center mr-4"
+        <!-- Tab: Cálculo ROI -->
+        <div id="roi" class="tab-content hidden">
+          <h2 class="text-2xl font-bold easyjur-black mb-6">Cálculo de ROI</h2>
+          <div class="bg-white rounded-lg shadow-md p-8 text-center">
+            <div class="max-w-md mx-auto">
+              <svg
+                class="w-16 h-16 easyjur-gray mx-auto mb-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <i class="fas fa-exchange-alt text-white text-xl"></i>
-              </div>
-              <h3 class="text-2xl font-bold easyjur-text-dark">
-                Cálculo de Migração
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+              <h3 class="text-xl font-bold easyjur-black mb-2">
+                Em Desenvolvimento
               </h3>
-            </div>
-
-            <div class="card-description">
-              <p class="easyjur-text-gray mb-6 leading-relaxed">
-                Calcule o custo e esforço para migrar do seu sistema atual para
-                a EasyJur. Entenda todo o processo de transição e planeje cada
-                etapa da implementação de maneira eficiente e organizada.
+              <p class="easyjur-gray">
+                Esta funcionalidade estará disponível em breve.
               </p>
             </div>
-
-            <div class="card-footer">
-              <div class="flex justify-between items-center">
-                <span class="text-sm easyjur-text-gray">
-                  <i class="fas fa-clock mr-1"></i>
-                  5 min para calcular
-                </span>
-                <a
-                  href="pagina/migracao.html"
-                  class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg transition duration-200 flex items-center"
-                >
-                  Ir <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
 
-        <!-- Card ROI -->
-        <div class="service-card bg-white rounded-lg shadow-lg p-6">
-          <div class="card-content">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-12 h-12 rounded-full easyjur-bg-primary flex items-center justify-center mr-4"
+        <!-- Tab: Resumo -->
+        <div id="resumo" class="tab-content hidden">
+          <h2 class="text-2xl font-bold easyjur-black mb-6">Resumo Geral</h2>
+          <div class="bg-white rounded-lg shadow-md p-8 text-center">
+            <div class="max-w-md mx-auto">
+              <svg
+                class="w-16 h-16 easyjur-gray mx-auto mb-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <i class="fas fa-chart-line text-white text-xl"></i>
-              </div>
-              <h3 class="text-2xl font-bold easyjur-text-dark">
-                Cálculo de ROI
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+              <h3 class="text-xl font-bold easyjur-black mb-2">
+                Em Desenvolvimento
               </h3>
-            </div>
-
-            <div class="card-description">
-              <p class="easyjur-text-gray mb-6 leading-relaxed">
-                Analise o Retorno sobre Investimento da implementação da EasyJur
-                no seu escritório. Calcule ganhos de produtividade, redução de
-                custos e otimização de processos.
+              <p class="easyjur-gray">
+                Esta funcionalidade estará disponível em breve.
               </p>
             </div>
-
-            <div class="card-footer">
-              <div class="flex justify-between items-center">
-                <span class="text-sm easyjur-text-gray">
-                  <i class="fas fa-clock mr-1"></i>
-                  3 min para calcular
-                </span>
-                <a
-                  href="#"
-                  class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg transition duration-200 flex items-center"
-                >
-                  Ir <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
-      </div>
-    </main>
-
-    <footer class="bg-gray-800 text-white mt-12">
-      <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- Logo e Descrição -->
-          <div class="lg:col-span-2">
-            <img
-              src="imagens/logo-calculadoras-branca.png"
-              class="w-[180px] mb-4"
-              alt="Logo EasyJur"
-            />
-            <p class="text-gray-300 mb-4 max-w-md">
-              Ferramentas inteligentes para auxiliar escritórios de advocacia na
-              tomada de decisões estratégicas e cálculo de investimentos.
-            </p>
-            <div class="flex space-x-4">
-              <a href="#" class="text-gray-300 hover:text-white transition">
-                <i class="fab fa-linkedin text-xl"></i>
-              </a>
-              <a href="#" class="text-gray-300 hover:text-white transition">
-                <i class="fab fa-instagram text-xl"></i>
-              </a>
-              <a href="#" class="text-gray-300 hover:text-white transition">
-                <i class="fab fa-facebook text-xl"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Links Rápidos -->
-          <div>
-            <h3 class="text-lg font-bold mb-4">Calculadoras EasyJur</h3>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="pagina/planos.html"
-                  class="text-gray-300 hover:text-white transition"
-                >
-                  Calculadora de Planos
-                </a>
-              </li>
-              <li>
-                <a
-                  href="pagina/migracao.html"
-                  class="text-gray-300 hover:text-white transition"
-                >
-                  Cálculo de Migração
-                </a>
-              </li>
-              <li>
-                <a href="#" class="text-gray-300 hover:text-white transition">
-                  Cálculo de ROI
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Logins -->
-          <div>
-            <h3 class="text-lg font-bold mb-4">Acessar Sistemas</h3>
-            <ul class="space-y-3">
-              <li>
-                <a
-                  href="https://app.easyjur.com"
-                  target="_blank"
-                  class="flex items-center text-gray-300 hover:text-white transition group"
-                >
-                  <i
-                    class="fas fa-sign-in-alt mr-3 group-hover:translate-x-1 transition-transform"
-                  ></i>
-                  Login EasyJur
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://legalops.easyjur.com/login"
-                  target="_blank"
-                  class="flex items-center text-gray-300 hover:text-white transition group"
-                >
-                  <i
-                    class="fas fa-sign-in-alt mr-3 group-hover:translate-x-1 transition-transform"
-                  ></i>
-                  Login Legal Ops
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://easyjur.com/"
-                  target="_blank"
-                  class="flex items-center text-gray-300 hover:text-white transition group"
-                >
-                  <i
-                    class="fas fa-globe mr-3 group-hover:translate-x-1 transition-transform"
-                  ></i>
-                  Site Oficial EasyJur
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://easyjur.com/legal-operations/"
-                  target="_blank"
-                  class="flex items-center text-gray-300 hover:text-white transition group"
-                >
-                  <i
-                    class="fas fa-globe mr-3 group-hover:translate-x-1 transition-transform"
-                  ></i>
-                  Site Oficial Legal Ops
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://easyjur.com/fale-conosco/"
-                  target="_blank"
-                  class="flex items-center text-gray-300 hover:text-white transition group"
-                >
-                  <i
-                    class="fas fa-headset mr-3 group-hover:translate-x-1 transition-transform"
-                  ></i>
-                  Central de Suporte
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Divider -->
-        <div class="border-t border-gray-700 mt-8 pt-6">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <p class="text-gray-400 text-sm mb-4 md:mb-0">
-              &copy; 2026 EasyJur. Todos os direitos reservados.
-            </p>
-            <div class="flex space-x-6">
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white text-sm transition"
-              >
-                Política de Privacidade
-              </a>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white text-sm transition"
-              >
-                Termos de Uso
-              </a>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white text-sm transition"
-              >
-                Cookies
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+      </main>
+    </div>
 
     <script src="script/main.js"></script>
+    <script src="script/planos.js"></script>
   </body>
 </html>

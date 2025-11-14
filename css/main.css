@@ -1,0 +1,126 @@
+.plan-card {
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.plan-card.selected {
+  border-color: #e5293f;
+  box-shadow: 0 0 0 3px rgba(229, 41, 63, 0.2);
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-top: 8px;
+}
+
+.easyjur-container {
+  font-family: "Inter", sans-serif;
+}
+.easyjur-red {
+  color: #e5293f;
+}
+.easyjur-bg-red {
+  background-color: #e5293f;
+}
+.easyjur-gray-light {
+  color: #acbac2;
+}
+.easyjur-gray-dark {
+  color: #80929b;
+}
+.easyjur-green {
+  color: #61ce70;
+}
+.easyjur-bg-green {
+  background-color: #61ce70;
+}
+.easyjur-black {
+  color: #29292a;
+}
+.easyjur-gray {
+  color: #7a7a7a;
+}
+
+.tab-active {
+  border-bottom: 3px solid #e5293f;
+  color: #e5293f;
+  font-weight: 600;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #61ce70;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.recomendacao-verde {
+  background-color: #f0fff4;
+  border: 1px solid #9ae6b4;
+  color: #22543d;
+}
+
+.recomendacao-amarelo {
+  background-color: #fffbeb;
+  border: 1px solid #fbd38d;
+  color: #744210;
+}
+
+.recomendacao-azul {
+  background-color: #ebf8ff;
+  border: 1px solid #90cdf4;
+  color: #1a365d;
+}

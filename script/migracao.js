@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
     resultadoROI.classList.remove("hidden");
   });
 
-  // Botão de imprimir - CORRIGIDO
+  // Botão de imprimir
   const botaoImprimir = document.getElementById("botao-imprimir");
   if (botaoImprimir) {
     botaoImprimir.addEventListener("click", function () {
@@ -322,16 +322,13 @@ document.addEventListener("DOMContentLoaded", function () {
           "Não calculado";
       }
 
-      // Mostrar a proposta de impressão e imprimir
-      const proposta = document.getElementById("proposta-impressao");
-      proposta.classList.remove("hidden");
+      // IMPORTANTE: Não mostrar na tela, apenas preparar para impressão
+      // A proposta já está com display: none no CSS normal
+      // E será mostrada apenas durante a impressão pelo media query
 
+      // Disparar a impressão
       setTimeout(() => {
         window.print();
-        // Esconder novamente após a impressão
-        setTimeout(() => {
-          proposta.classList.add("hidden");
-        }, 100);
       }, 100);
     });
   }

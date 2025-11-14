@@ -1,127 +1,29 @@
-/* Cores Personalizadas Easyjur */
-.easyjur-bg-primary {
-  background-color: #e5293f;
-}
-.easyjur-text-primary {
-  color: #e5293f;
-}
-.easyjur-bg-secondary {
-  background-color: #acbac2;
-}
-.easyjur-text-secondary {
-  color: #acbac2;
-}
-.easyjur-text-dark {
-  color: #29292a;
-}
-.easyjur-text-gray {
-  color: #7a7a7a;
-}
-.easyjur-bg-green {
-  background-color: #61ce70;
-}
-.easyjur-text-green {
-  color: #61ce70;
+.plan-card {
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
 }
 
-/* Switch Toggle */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+.plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+.plan-card.selected {
+  border-color: #e5293f;
+  box-shadow: 0 0 0 3px rgba(229, 41, 63, 0.2);
 }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 34px;
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #61ce70;
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-
-/* Animação de transição entre páginas */
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-  animation: fadeIn 0.5s;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Estilos para impressão */
-@media print {
-  body * {
-    visibility: hidden;
-  }
-  #configuracao-plano,
-  #configuracao-plano * {
-    visibility: visible;
-  }
-  #configuracao-plano {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    box-shadow: none;
-    border: 1px solid #ddd;
-  }
-  .no-print {
-    display: none !important;
-  }
-
-  /* Estilos para impressão normal (fallback) */
-  body {
-    font-size: 12pt;
-    line-height: 1.4;
-  }
-  .bg-gray-50 {
-    background: white !important;
-  }
-  .shadow-lg {
-    box-shadow: none !important;
-  }
-  .rounded-lg {
-    border-radius: 0 !important;
-  }
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-top: 8px;
 }
