@@ -1048,29 +1048,135 @@
 
         <!-- Tab: Cálculo ROI -->
         <div id="roi" class="tab-content hidden">
-          <h2 class="text-2xl font-bold easyjur-black mb-6">Cálculo de ROI</h2>
-          <div class="bg-white rounded-lg shadow-md p-8 text-center">
-            <div class="max-w-md mx-auto">
-              <svg
-                class="w-16 h-16 easyjur-gray mx-auto mb-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                ></path>
-              </svg>
-              <h3 class="text-xl font-bold easyjur-black mb-2">
-                Em Desenvolvimento
-              </h3>
-              <p class="easyjur-gray">
-                Esta funcionalidade estará disponível em breve.
-              </p>
+          <h2 class="text-2xl font-bold easyjur-black mb-6">
+            Cálculo de ROI - Eficiência de Tempo
+          </h2>
+
+          <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-xl font-bold easyjur-black mb-4">
+              Calculadora de Economia de Tempo
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <!-- Quantidade de Processos -->
+              <div>
+                <label
+                  class="block easyjur-black font-medium mb-2"
+                  for="roi-quantidade-processos"
+                >
+                  Quantidade de processos
+                </label>
+                <input
+                  type="number"
+                  id="roi-quantidade-processos"
+                  min="0"
+                  max="99999"
+                  value=""
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  placeholder="Quantos processos o cliente tem?"
+                />
+                <p class="text-sm easyjur-gray mt-2">
+                  Número total de processos/pastas
+                </p>
+              </div>
+
+              <!-- Tempo Médio -->
+              <div>
+                <label
+                  class="block easyjur-black font-medium mb-2"
+                  for="roi-tempo-medio"
+                >
+                  Tempo médio por processo (minutos)
+                </label>
+                <input
+                  type="number"
+                  id="roi-tempo-medio"
+                  min="1"
+                  max="480"
+                  value=""
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  placeholder="Minutos para cadastrar uma pasta"
+                />
+                <p class="text-sm easyjur-gray mt-2">
+                  Tempo para cadastrar uma pasta manualmente
+                </p>
+              </div>
+            </div>
+
+            <!-- REMOVIDO: Botão Calcular -->
+          </div>
+
+          <!-- Resultado do ROI -->
+          <div
+            id="resultado-roi-calculadora"
+            class="hidden bg-white rounded-lg shadow-md p-6"
+          >
+            <h3 class="text-xl font-bold easyjur-black mb-6">
+              Resultado - Economia de Tempo
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Economia em Horas -->
+              <div class="bg-green-50 rounded-lg p-6 text-center">
+                <div class="flex justify-center items-center mb-3">
+                  <svg
+                    class="w-8 h-8 easyjur-green"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                </div>
+                <h4 class="font-bold easyjur-black mb-2">
+                  Economia de Tempo (Horas)
+                </h4>
+                <p
+                  id="roi-economia-horas"
+                  class="text-2xl font-bold easyjur-green"
+                >
+                  0 horas
+                </p>
+                <p class="text-sm easyjur-gray mt-2">
+                  Total de horas economizadas
+                </p>
+              </div>
+
+              <!-- Economia em Dias -->
+              <div class="bg-blue-50 rounded-lg p-6 text-center">
+                <div class="flex justify-center items-center mb-3">
+                  <svg
+                    class="w-8 h-8 easyjur-blue"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                </div>
+                <h4 class="font-bold easyjur-black mb-2">
+                  Economia de Tempo (Dias)
+                </h4>
+                <p
+                  id="roi-economia-dias"
+                  class="text-2xl font-bold easyjur-blue"
+                >
+                  0 dias úteis
+                </p>
+                <p class="text-sm easyjur-gray mt-2">
+                  Considerando jornada de 8h/dia
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -1107,6 +1213,7 @@
     </div>
 
     <script src="script/main.js"></script>
+    <script src="script/roi.js"></script>
     <script src="script/planos.js"></script>
     <script src="script/migracao.js"></script>
   </body>
