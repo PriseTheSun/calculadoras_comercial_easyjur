@@ -1,4 +1,4 @@
-// Função para calcular o valor total da migração - CORRIGIDA
+// Função para calcular o valor total da migração
 function calcularValorTotal(quantidade, boxes) {
   let valor_parcial = 0;
 
@@ -81,35 +81,29 @@ function formatarMoeda(valor) {
 // Função para atualizar os resultados
 function atualizarResultados() {
   // Obter valores dos inputs
-  const quantidade =
-    parseInt(document.getElementById("quantidade-processos").value) || 0;
+  const quantidade = parseInt($("#quantidade-processos").val()) || 0;
 
   // Obter estado dos módulos
   const boxes = {
-    agenda: document.getElementById("modulo-agenda").checked,
-    andamentos: document.getElementById("modulo-andamentos").checked,
-    pedidos_dos_processos: document.getElementById("modulo-pedidos").checked,
-    projetos_consultivos: document.getElementById("modulo-projetos").checked,
-    campos_personalizados: document.getElementById("modulo-campos").checked,
-    ged: document.getElementById("modulo-ged").checked,
-    financeiro: document.getElementById("modulo-financeiro").checked,
-    financeiro_externo: document.getElementById("modulo-financeiro-externo")
-      .checked,
-    saneamento: document.getElementById("modulo-saneamento").checked,
-    desdobramentos: document.getElementById("modulo-desdobramentos").checked,
+    agenda: $("#modulo-agenda").is(":checked"),
+    andamentos: $("#modulo-andamentos").is(":checked"),
+    pedidos_dos_processos: $("#modulo-pedidos").is(":checked"),
+    projetos_consultivos: $("#modulo-projetos").is(":checked"),
+    campos_personalizados: $("#modulo-campos").is(":checked"),
+    ged: $("#modulo-ged").is(":checked"),
+    financeiro: $("#modulo-financeiro").is(":checked"),
+    financeiro_externo: $("#modulo-financeiro-externo").is(":checked"),
+    saneamento: $("#modulo-saneamento").is(":checked"),
+    desdobramentos: $("#modulo-desdobramentos").is(":checked"),
   };
 
   // Calcular valores
   const resultado = calcularValorTotal(quantidade, boxes);
 
   // Atualizar interface
-  document.getElementById("resumo-quantidade").textContent = quantidade;
-  document.getElementById("resumo-valor-parcial").textContent = formatarMoeda(
-    resultado.valor_parcial
-  );
-  document.getElementById("resumo-valor-total").textContent = formatarMoeda(
-    resultado.valor_total
-  );
+  $("#resumo-quantidade").text(quantidade);
+  $("#resumo-valor-parcial").text(formatarMoeda(resultado.valor_parcial));
+  $("#resumo-valor-total").text(formatarMoeda(resultado.valor_total));
 
   // Listar módulos selecionados
   const modulosSelecionados = [];
@@ -133,203 +127,74 @@ function atualizarResultados() {
   if (boxes.desdobramentos) modulosSelecionados.push("Desdobramentos");
 
   // Atualizar badges dos módulos selecionados
-  const modulosContainer = document.getElementById("resumo-modulos");
-  modulosContainer.innerHTML = "";
+  const modulosContainer = $("#resumo-modulos");
+  modulosContainer.empty();
 
   if (modulosSelecionados.length === 0) {
-    const emptyMsg = document.createElement("span");
-    emptyMsg.className = "text-gray-500 text-sm";
-    emptyMsg.textContent = "Nenhum módulo selecionado";
-    modulosContainer.appendChild(emptyMsg);
+    modulosContainer.append(
+      '<span class="text-gray-500 text-sm">Nenhum módulo selecionado</span>'
+    );
   } else {
     modulosSelecionados.forEach((modulo) => {
-      const badge = document.createElement("span");
-      badge.className =
-        "bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm";
-      badge.textContent = modulo;
-      modulosContainer.appendChild(badge);
+      modulosContainer.append(
+        `<span class="badge badge-green">${modulo}</span>`
+      );
     });
   }
 
   // Efeito de destaque na atualização
-  document
-    .getElementById("resumo-valor-total")
-    .classList.add("highlight-update");
+  $("#resumo-valor-total").addClass("highlight-update");
   setTimeout(() => {
-    document
-      .getElementById("resumo-valor-total")
-      .classList.remove("highlight-update");
+    $("#resumo-valor-total").removeClass("highlight-update");
   }, 1000);
-
-  // Mostrar resultado se ainda não estiver visível
-  const resultadoMigracao = document.getElementById("resultado-migracao");
-  if (!resultadoMigracao.classList.contains("hidden")) {
-    resultadoMigracao.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-    });
-  }
 }
 
-// Eventos quando o DOM estiver carregado
-document.addEventListener("DOMContentLoaded", function () {
-  // Navegação entre páginas
-  const navLinks = document.querySelectorAll(".nav-link");
-  const pages = document.querySelectorAll(".page");
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const targetPage = this.getAttribute("data-page");
-
-      // Atualizar estado dos links de navegação
-      navLinks.forEach((navLink) => {
-        navLink.classList.remove("easyjur-text-dark");
-        navLink.classList.add("easyjur-text-gray");
-      });
-      this.classList.remove("easyjur-text-gray");
-      this.classList.add("easyjur-text-dark");
-
-      // Mostrar página selecionada
-      pages.forEach((page) => {
-        page.classList.remove("active");
-      });
-      document.getElementById(targetPage).classList.add("active");
-    });
-  });
-
-  // Menu mobile
-  const mobileMenuButton = document.getElementById("mobile-menu-button");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  if (mobileMenuButton) {
-    mobileMenuButton.addEventListener("click", function () {
-      mobileMenu.classList.toggle("hidden");
-    });
-  }
-
+// Inicialização da aba de migração
+function inicializarAbaMigracao() {
   // Atualização dinâmica ao alterar quantidade
-  document
-    .getElementById("quantidade-processos")
-    .addEventListener("input", atualizarResultados);
+  $("#quantidade-processos").on("input", atualizarResultados);
 
   // Atualização dinâmica ao alterar switches
-  const switches = document.querySelectorAll(".switch input");
-  switches.forEach((switchElement) => {
-    switchElement.addEventListener("change", atualizarResultados);
-  });
+  $(".switch input").on("change", atualizarResultados);
 
   // Botão Calcular Migração
-  const calcularMigracaoBtn = document.getElementById("calcular-migracao");
-  const resultadoMigracao = document.getElementById("resultado-migracao");
-
-  calcularMigracaoBtn.addEventListener("click", function () {
+  $("#calcular-migracao").on("click", function () {
     atualizarResultados();
 
     // Mostrar resultado
-    resultadoMigracao.classList.remove("hidden");
+    $("#resultado-migracao").removeClass("hidden");
 
     // Scroll para o resultado
-    resultadoMigracao.scrollIntoView({ behavior: "smooth" });
+    $("html, body").animate(
+      {
+        scrollTop: $("#resultado-migracao").offset().top - 100,
+      },
+      1000
+    );
   });
 
   // Botão Calcular ROI
-  const calcularROIBtn = document.getElementById("calcular-roi");
-  const resultadoROI = document.getElementById("resultado-roi");
-
-  calcularROIBtn.addEventListener("click", function () {
+  $("#calcular-roi").on("click", function () {
     // Obter valores dos inputs
-    const quantidade =
-      parseInt(document.getElementById("quantidade-processos").value) || 0;
-    const tempoPorPasta =
-      parseInt(document.getElementById("tempo-por-pasta").value) || 0;
-    const valorHora =
-      parseFloat(document.getElementById("valor-hora").value) || 0;
+    const quantidade = parseInt($("#quantidade-processos").val()) || 0;
+    const tempoPorPasta = parseInt($("#tempo-por-pasta").val()) || 0;
+    const valorHora = parseFloat($("#valor-hora").val()) || 0;
 
     // Calcular ROI
     const roi = calcularROI(quantidade, tempoPorPasta, valorHora);
 
     // Atualizar interface
-    document.getElementById(
-      "roi-horas"
-    ).textContent = `${roi.tempo_total_horas} horas`;
-    document.getElementById(
-      "roi-dias"
-    ).textContent = `${roi.tempo_total_dias} dias`;
-    document.getElementById("roi-valor-hora").textContent =
-      formatarMoeda(valorHora);
-    document.getElementById("roi-economia").textContent = formatarMoeda(
-      roi.economia_financeira
-    );
+    $("#roi-horas").text(`${roi.tempo_total_horas} horas`);
+    $("#roi-dias").text(`${roi.tempo_total_dias} dias`);
+    $("#roi-valor-hora").text(formatarMoeda(valorHora));
+    $("#roi-economia").text(formatarMoeda(roi.economia_financeira));
 
     // Mostrar resultado
-    resultadoROI.classList.remove("hidden");
+    $("#resultado-roi").removeClass("hidden");
   });
+}
 
-  // Botão de imprimir
-  const botaoImprimir = document.getElementById("botao-imprimir");
-  if (botaoImprimir) {
-    botaoImprimir.addEventListener("click", function () {
-      // Atualizar dados na proposta de impressão
-      const now = new Date();
-      document.getElementById("print-data").textContent =
-        now.toLocaleDateString("pt-BR");
-      document.getElementById("print-ano").textContent = now.getFullYear();
-      document.getElementById("print-quantidade").textContent =
-        document.getElementById("resumo-quantidade").textContent;
-      document.getElementById("print-valor-parcial").textContent =
-        document.getElementById("resumo-valor-parcial").textContent;
-      document.getElementById("print-valor-total").textContent =
-        document.getElementById("resumo-valor-total").textContent;
-
-      // Atualizar módulos na impressão
-      const modulosContainer = document.getElementById("print-modulos");
-      modulosContainer.innerHTML = "";
-      const modulos = document.querySelectorAll("#resumo-modulos span");
-
-      if (
-        modulos.length === 0 ||
-        modulos[0].classList.contains("text-gray-500")
-      ) {
-        const emptyMsg = document.createElement("span");
-        emptyMsg.className = "print-module-badge";
-        emptyMsg.textContent = "Nenhum módulo selecionado";
-        modulosContainer.appendChild(emptyMsg);
-      } else {
-        modulos.forEach((modulo) => {
-          const badge = document.createElement("span");
-          badge.className = "print-module-badge";
-          badge.textContent = modulo.textContent;
-          modulosContainer.appendChild(badge);
-        });
-      }
-
-      // Atualizar ROI na impressão, se disponível
-      if (
-        !document.getElementById("resultado-roi").classList.contains("hidden")
-      ) {
-        document.getElementById("print-tempo-economizado").textContent = `${
-          document.getElementById("roi-horas").textContent
-        } (${document.getElementById("roi-dias").textContent} dias úteis)`;
-        document.getElementById("print-economia-financeira").textContent =
-          document.getElementById("roi-economia").textContent;
-        document.getElementById("print-valor-hora").textContent =
-          document.getElementById("roi-valor-hora").textContent;
-      } else {
-        document.getElementById("print-tempo-economizado").textContent =
-          "Não calculado";
-        document.getElementById("print-economia-financeira").textContent =
-          "Não calculado";
-      }
-
-      // IMPORTANTE: Não mostrar na tela, apenas preparar para impressão
-      // A proposta já está com display: none no CSS normal
-      // E será mostrada apenas durante a impressão pelo media query
-
-      // Disparar a impressão
-      setTimeout(() => {
-        window.print();
-      }, 100);
-    });
-  }
+// Inicializar quando o documento estiver pronto
+$(document).ready(function () {
+  inicializarAbaMigracao();
 });

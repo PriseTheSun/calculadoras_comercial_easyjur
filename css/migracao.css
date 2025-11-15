@@ -1,0 +1,44 @@
+.module-card {
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.module-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.1);
+}
+
+.module-card.selected {
+  border-color: #61ce70;
+  box-shadow: 0 0 0 2px rgba(97, 206, 112, 0.2);
+}
+
+.highlight-update {
+  animation: highlight 1s ease;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: rgba(97, 206, 112, 0.3);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.badge {
+  display: inline-block;
+  background-color: #e2e8f0;
+  color: #4a5568;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge-green {
+  background-color: #c6f6d5;
+  color: #22543d;
+}

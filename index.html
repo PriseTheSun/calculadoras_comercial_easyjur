@@ -13,8 +13,15 @@
       rel="stylesheet"
     />
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css"
+    />
+
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/planos.css" />
+    <link rel="stylesheet" href="css/migracao.css" />
   </head>
   <body class="bg-gray-50 easyjur-container">
     <div class="container mx-auto px-4 py-8">
@@ -716,32 +723,325 @@
 
         <!-- Outras abas -->
         <!-- Tab: Cálculo Migração -->
+        <!-- Tab: Migração -->
         <div id="migracao" class="tab-content hidden">
           <h2 class="text-2xl font-bold easyjur-black mb-6">
             Cálculo de Migração
           </h2>
-          <div class="bg-white rounded-lg shadow-md p-8 text-center">
-            <div class="max-w-md mx-auto">
-              <svg
-                class="w-16 h-16 easyjur-gray mx-auto mb-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+
+          <!-- Quantidade de Processos -->
+          <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-xl font-bold easyjur-black mb-4">
+              Quantidade de Processos
+            </h3>
+            <div class="mb-4">
+              <label
+                class="block easyjur-black font-medium mb-2"
+                for="quantidade-processos"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                ></path>
-              </svg>
-              <h3 class="text-xl font-bold easyjur-black mb-2">
-                Em Desenvolvimento
-              </h3>
-              <p class="easyjur-gray">
-                Esta funcionalidade estará disponível em breve.
-              </p>
+                Total de processos/pastas para migração
+              </label>
+              <input
+                type="number"
+                id="quantidade-processos"
+                min="0"
+                value="0"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                placeholder="Informe o número total de processos/pastas a migrar"
+              />
+            </div>
+          </div>
+
+          <!-- Módulos de Migração -->
+          <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-xl font-bold easyjur-black mb-4">
+              Módulos de Migração
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Agenda -->
+              <div class="module-card bg-white rounded-lg border p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-medium easyjur-black">Agenda</h4>
+                  <label class="switch">
+                    <input type="checkbox" id="modulo-agenda" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <p class="text-sm easyjur-gray mb-2">
+                  Migração de compromissos, prazos e eventos da agenda
+                </p>
+              </div>
+
+              <!-- Pedidos dos Processos -->
+              <div class="module-card bg-white rounded-lg border p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-medium easyjur-black">
+                    Pedidos dos Processos
+                  </h4>
+                  <label class="switch">
+                    <input type="checkbox" id="modulo-pedidos" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <p class="text-sm easyjur-gray mb-2">
+                  Requerimentos, petições e documentos processuais
+                </p>
+              </div>
+
+              <!-- Campos Personalizados -->
+              <div class="module-card bg-white rounded-lg border p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-medium easyjur-black">
+                    Campos Personalizados
+                  </h4>
+                  <label class="switch">
+                    <input type="checkbox" id="modulo-campos" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <p class="text-sm easyjur-gray mb-2">
+                  Campos customizados e metadados específicos
+                </p>
+              </div>
+
+              <!-- Saneamento -->
+              <div class="module-card bg-white rounded-lg border p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-medium easyjur-black">Saneamento</h4>
+                  <label class="switch">
+                    <input type="checkbox" id="modulo-saneamento" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <p class="text-sm easyjur-gray mb-2">
+                  Correção e padronização de dados
+                </p>
+              </div>
+
+              <!-- Financeiro -->
+              <div class="module-card bg-white rounded-lg border p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-medium easyjur-black">Financeiro</h4>
+                  <label class="switch">
+                    <input type="checkbox" id="modulo-financeiro" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <p class="text-sm easyjur-gray mb-2">
+                  Dados financeiros, honorários e custas
+                </p>
+              </div>
+
+              <!-- Financeiro Externo -->
+              <div class="module-card bg-white rounded-lg border p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-medium easyjur-black">Financeiro Externo</h4>
+                  <label class="switch">
+                    <input type="checkbox" id="modulo-financeiro-externo" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <p class="text-sm easyjur-gray mb-2">
+                  Dados financeiros de sistemas externos
+                </p>
+              </div>
+
+              <!-- Andamentos -->
+              <div class="module-card bg-white rounded-lg border p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-medium easyjur-black">Andamentos</h4>
+                  <label class="switch">
+                    <input type="checkbox" id="modulo-andamentos" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <p class="text-sm easyjur-gray mb-2">
+                  Histórico completo de andamentos processuais
+                </p>
+              </div>
+
+              <!-- Projetos Consultivos -->
+              <div class="module-card bg-white rounded-lg border p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-medium easyjur-black">
+                    Projetos Consultivos
+                  </h4>
+                  <label class="switch">
+                    <input type="checkbox" id="modulo-projetos" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <p class="text-sm easyjur-gray mb-2">
+                  Projetos e consultorias jurídicas
+                </p>
+              </div>
+
+              <!-- GED -->
+              <div class="module-card bg-white rounded-lg border p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-medium easyjur-black">GED</h4>
+                  <label class="switch">
+                    <input type="checkbox" id="modulo-ged" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <p class="text-sm easyjur-gray mb-2">
+                  Gestão Eletrônica de Documentos e arquivos
+                </p>
+              </div>
+
+              <!-- Desdobramentos -->
+              <div class="module-card bg-white rounded-lg border p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-medium easyjur-black">Desdobramentos</h4>
+                  <label class="switch">
+                    <input type="checkbox" id="modulo-desdobramentos" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <p class="text-sm easyjur-gray mb-2">
+                  Variável - +120% se mais de 1000 processos
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botão Calcular -->
+          <div class="text-center mb-8">
+            <button
+              id="calcular-migracao"
+              class="py-3 px-8 easyjur-bg-green text-white font-medium rounded-lg hover:bg-green-600 transition-colors text-lg"
+            >
+              Calcular Migração
+            </button>
+          </div>
+
+          <!-- Resultado da Migração -->
+          <div
+            id="resultado-migracao"
+            class="hidden bg-white rounded-lg shadow-md p-6 mb-8"
+          >
+            <h3 class="text-xl font-bold easyjur-black mb-6">
+              Resultado da Migração
+            </h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <!-- Resumo -->
+              <div>
+                <h4 class="font-bold easyjur-black mb-4">Resumo da Cotação</h4>
+                <div class="space-y-3">
+                  <div class="summary-item">
+                    <span class="easyjur-black">Quantidade de processos:</span>
+                    <span id="resumo-quantidade" class="font-medium">0</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="easyjur-black">Valor parcial:</span>
+                    <span id="resumo-valor-parcial" class="font-medium"
+                      >R$ 0,00</span
+                    >
+                  </div>
+                  <div class="summary-item flex flex-col">
+                    <span class="easyjur-black mb-2"
+                      >Módulos selecionados:</span
+                    >
+                    <div id="resumo-modulos" class="flex flex-wrap gap-2">
+                      <span class="text-gray-500 text-sm"
+                        >Nenhum módulo selecionado</span
+                      >
+                    </div>
+                  </div>
+                  <div class="summary-total">
+                    <span class="easyjur-black font-bold text-lg"
+                      >Valor total da migração:</span
+                    >
+                    <span
+                      id="resumo-valor-total"
+                      class="font-bold text-xl easyjur-red"
+                      >R$ 0,00</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cálculo do ROI -->
+              <div>
+                <h4 class="font-bold easyjur-black mb-4">
+                  Cálculo do ROI (Retorno sobre Investimento)
+                </h4>
+                <div class="space-y-4">
+                  <div>
+                    <label
+                      class="block easyjur-black font-medium mb-2"
+                      for="tempo-por-pasta"
+                    >
+                      Tempo médio por pasta (minutos)
+                    </label>
+                    <input
+                      type="number"
+                      id="tempo-por-pasta"
+                      min="0"
+                      value="15"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                      placeholder="Tempo em minutos para cadastrar uma pasta manualmente"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block easyjur-black font-medium mb-2"
+                      for="valor-hora"
+                    >
+                      Valor da hora do colaborador (R$)
+                    </label>
+                    <input
+                      type="number"
+                      id="valor-hora"
+                      min="0"
+                      step="0.01"
+                      value="80"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                      placeholder="Valor em reais da hora de trabalho"
+                    />
+                  </div>
+                  <button
+                    id="calcular-roi"
+                    class="w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    Calcular ROI
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resultado do ROI -->
+            <div
+              id="resultado-roi"
+              class="hidden mt-8 pt-6 border-t border-gray-200"
+            >
+              <h4 class="font-bold easyjur-black mb-4">Resultado do ROI</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-green-50 rounded-lg p-4 text-center">
+                  <p class="text-sm easyjur-gray mb-1">Tempo Economizado</p>
+                  <p id="roi-horas" class="text-xl font-bold easyjur-black">
+                    0 horas
+                  </p>
+                  <p id="roi-dias" class="text-sm easyjur-gray">0 dias úteis</p>
+                </div>
+                <div class="bg-blue-50 rounded-lg p-4 text-center">
+                  <p class="text-sm easyjur-gray mb-1">Valor da Hora</p>
+                  <p
+                    id="roi-valor-hora"
+                    class="text-xl font-bold easyjur-black"
+                  >
+                    R$ 0,00
+                  </p>
+                </div>
+                <div class="bg-purple-50 rounded-lg p-4 text-center">
+                  <p class="text-sm easyjur-gray mb-1">Economia Financeira</p>
+                  <p id="roi-economia" class="text-xl font-bold easyjur-black">
+                    R$ 0,00
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -808,5 +1108,6 @@
 
     <script src="script/main.js"></script>
     <script src="script/planos.js"></script>
+    <script src="script/migracao.js"></script>
   </body>
 </html>
