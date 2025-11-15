@@ -12,6 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/planos.css" />
   </head>
@@ -22,12 +23,7 @@
         <h1
           class="text-3xl font-bold easyjur-black text-center mb-2 flex justify-center items-center gap-4"
         >
-          <img
-            src="assets/images/logo-calculadoras.png"
-            alt="logomarca easyjur"
-            class="w-32 h-auto"
-            srcset=""
-          />
+          <span>EasyJur - Calculadora de Planos</span>
         </h1>
         <p class="text-center easyjur-gray-dark mb-6">
           Sistema de cálculo de planos para escritórios de advocacia
@@ -692,13 +688,33 @@
                       >R$ 0,00</span
                     >
                   </div>
+
+                  <!-- Nova seção: Recomendação de Plano -->
+                  <div
+                    id="recomendacao-plano"
+                    class="hidden pt-4 mt-4 border-t border-gray-300"
+                  >
+                    <div class="summary-item">
+                      <span class="easyjur-black font-medium"
+                        >Recomendação:</span
+                      >
+                      <span
+                        id="plano-recomendado"
+                        class="font-medium easyjur-green"
+                      ></span>
+                    </div>
+                    <p
+                      id="detalhe-recomendacao"
+                      class="text-sm easyjur-gray mt-2 text-right"
+                    ></p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Outras abas permanecem iguais -->
+        <!-- Outras abas -->
         <!-- Tab: Cálculo Migração -->
         <div id="migracao" class="tab-content hidden">
           <h2 class="text-2xl font-bold easyjur-black mb-6">
