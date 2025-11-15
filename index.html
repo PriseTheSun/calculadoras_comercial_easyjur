@@ -6,6 +6,10 @@
     <title>Cálculo de Planos - Comercial EasyJur</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- jQuery Mask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -521,7 +525,7 @@
                       >Usuários adicionais</label
                     >
                     <input
-                      type="number"
+                      type="text"
                       id="usuarios-adicionais"
                       min="0"
                       max="500"
@@ -540,7 +544,7 @@
                       >Pushs adicionais (pacotes de 100)</label
                     >
                     <input
-                      type="number"
+                      type="text"
                       id="pushs-adicionais"
                       min="0"
                       max="500"
@@ -558,7 +562,7 @@
                       >OABs adicionais</label
                     >
                     <input
-                      type="number"
+                      type="text"
                       id="oabs-adicionais"
                       min="0"
                       max="500"
@@ -577,7 +581,7 @@
                       >GED adicional (GB)</label
                     >
                     <input
-                      type="number"
+                      type="text"
                       id="ged-adicional"
                       min="0"
                       max="500"
@@ -629,7 +633,7 @@
                       >Quantidade de processos</label
                     >
                     <input
-                      type="number"
+                      type="text"
                       id="processos-quantidade"
                       min="0"
                       max="9999"
@@ -734,7 +738,7 @@
 
         <!-- Outras abas -->
         <!-- Tab: Cálculo Migração -->
-        <!-- Tab: Migração -->
+
         <div id="migracao" class="tab-content hidden">
           <h2 class="text-2xl font-bold easyjur-black mb-6">
             Cálculo de Migração
@@ -753,7 +757,7 @@
                 Total de processos/pastas para migração
               </label>
               <input
-                type="number"
+                type="text"
                 id="quantidade-processos"
                 min="0"
                 value="0"
@@ -988,7 +992,7 @@
                       Tempo médio por pasta (minutos)
                     </label>
                     <input
-                      type="number"
+                      type="text"
                       id="tempo-por-pasta"
                       min="0"
                       value="15"
@@ -1004,7 +1008,7 @@
                       Valor da hora do colaborador (R$)
                     </label>
                     <input
-                      type="number"
+                      type="text"
                       id="valor-hora"
                       min="0"
                       step="0.01"
@@ -1078,7 +1082,7 @@
                   Quantidade de processos
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   id="roi-quantidade-processos"
                   min="0"
                   max="99999"
@@ -1100,7 +1104,7 @@
                   Tempo médio por processo (minutos)
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   id="roi-tempo-medio"
                   min="1"
                   max="480"
@@ -1192,7 +1196,6 @@
           </div>
         </div>
 
-        <!-- Tab: Resumo -->
         <!-- Tab: Resumo -->
         <div id="resumo" class="tab-content hidden">
           <h2 class="text-2xl font-bold easyjur-black mb-6">Resumo Geral</h2>

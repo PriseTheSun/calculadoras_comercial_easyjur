@@ -42,3 +42,150 @@
   background-color: #c6f6d5;
   color: #22543d;
 }
+/* CORREÇÃO COMPLETA DAS NOTIFICAÇÕES */
+.jconfirm.jconfirm-modern .jconfirm-box {
+  width: 400px !important;
+  max-width: 90vw !important;
+  margin: 0 auto !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.jconfirm .jconfirm-box-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 999999 !important;
+}
+
+.jconfirm .jconfirm-bg {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.jconfirm .jconfirm-box div.jconfirm-title-c {
+  text-align: center !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem !important;
+  margin: 0 !important;
+  color: #1f2937 !important;
+}
+
+.jconfirm .jconfirm-box div.jconfirm-content-pane {
+  margin: 0 !important;
+}
+
+.jconfirm .jconfirm-box div.jconfirm-content {
+  text-align: center !important;
+  padding: 0 1.5rem 1.5rem 1.5rem !important;
+  margin: 0 !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  color: #6b7280 !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+.jconfirm .jconfirm-box .jconfirm-buttons {
+  text-align: center !important;
+  padding: 0 1.5rem 1.5rem 1.5rem !important;
+  margin: 0 !important;
+}
+
+.jconfirm .jconfirm-box .jconfirm-buttons button {
+  display: inline-block !important;
+  margin: 0 0.5rem !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  min-width: 80px !important;
+  transition: all 0.2s ease-in-out !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+/* Estilo específico para botão OK */
+.jconfirm .jconfirm-box .jconfirm-buttons button.btn-blue {
+  background: #3b82f6 !important;
+  color: white !important;
+}
+
+.jconfirm .jconfirm-box .jconfirm-buttons button.btn-blue:hover {
+  background: #2563eb !important;
+}
+
+/* Para notificações do tipo orange */
+.jconfirm.jconfirm-modern .jconfirm-box.jconfirm-type-orange {
+  border-top: 4px solid #f59e0b !important;
+}
+
+.jconfirm.jconfirm-modern .jconfirm-box.jconfirm-type-orange .jconfirm-title-c {
+  color: #f59e0b !important;
+}
+
+.jconfirm.jconfirm-modern
+  .jconfirm-box.jconfirm-type-orange
+  .jconfirm-title-c
+  .jconfirm-icon-c {
+  color: #f59e0b !important;
+}
+
+/* Remove qualquer animação problemática */
+.jconfirm .jconfirm-box {
+  animation: none !important;
+}
+
+.jconfirm.jconfirm-modern .jconfirm-box.jconfirm-hilight-orange {
+  animation: none !important;
+}
+
+/* Garante que o modal fique acima de tudo */
+.jconfirm {
+  z-index: 999999 !important;
+}
+
+/* Responsividade melhorada */
+@media (max-width: 640px) {
+  .jconfirm.jconfirm-modern .jconfirm-box {
+    width: 95% !important;
+    max-width: 350px !important;
+    margin: 1rem !important;
+  }
+
+  .jconfirm .jconfirm-box div.jconfirm-title-c {
+    font-size: 1.125rem !important;
+    padding: 1.25rem 1.25rem 0.5rem 1.25rem !important;
+  }
+
+  .jconfirm .jconfirm-box div.jconfirm-content {
+    font-size: 0.875rem !important;
+    padding: 0 1.25rem 1.25rem 1.25rem !important;
+  }
+
+  .jconfirm .jconfirm-box .jconfirm-buttons {
+    padding: 0 1.25rem 1.25rem 1.25rem !important;
+  }
+
+  .jconfirm .jconfirm-box .jconfirm-buttons button {
+    padding: 0.625rem 1.25rem !important;
+    margin: 0 0.25rem !important;
+    min-width: 70px !important;
+  }
+}
+
+/* Remove qualquer estilo conflitante do Bootstrap */
+.jconfirm * {
+  box-sizing: border-box !important;
+}

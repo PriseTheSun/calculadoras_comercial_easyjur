@@ -1,18 +1,78 @@
-// Dados dos módulos de migração
+// Dados dois módulos de migração - ATUALIZADO com os valores corretos
 const modulosMigracao = {
-  agenda: { nome: "Agenda", valor: 0.5 },
-  pedidos: { nome: "Pedidos dos Processos", valor: 1.0 },
-  campos: { nome: "Campos Personalizados", valor: 0.8 },
-  saneamento: { nome: "Saneamento", valor: 0.7 },
-  financeiro: { nome: "Financeiro", valor: 1.2 },
-  financeiroExterno: { nome: "Financeiro Externo", valor: 1.5 },
-  andamentos: { nome: "Andamentos", valor: 0.9 },
-  projetos: { nome: "Projetos Consultivos", valor: 1.1 },
-  ged: { nome: "GED", valor: 1.3 },
-  desdobramentos: { nome: "Desdobramentos", valor: 1.4 },
+  agenda: { nome: "Agenda", valor: 0.2 },
+  pedidos: { nome: "Pedidos dos Processos", valor: 0.2 },
+  campos: { nome: "Campos Personalizados", valor: 0.3 },
+  saneamento: { nome: "Saneamento", valor: 0.4 },
+  financeiro: { nome: "Financeiro", valor: 1.1 },
+  financeiroExterno: { nome: "Financeiro Externo", valor: 2.0 }, // multiplicador
+  andamentos: { nome: "Andamentos", valor: 0.2 },
+  projetos: { nome: "Projetos Consultivos", valor: 0.3 },
+  ged: { nome: "GED", valor: 0.5 },
+  desdobramentos: { nome: "Desdobramentos", valor: 1.2 },
 };
 
-// Cálculo de migração
+// Função para calcular valor total CORRIGIDA
+function calcularValorTotal(quantidade, modulosSelecionados) {
+  let valor_parcial = 0;
+
+  // CORREÇÃO: Se quantidade for 0, retorna 0 imediatamente
+  if (quantidade === 0) {
+    return {
+      valor_parcial: 0,
+      valor_total: 0,
+    };
+  }
+
+  // Definição do valor parcial (apenas para quantidade > 0)
+  if (quantidade <= 200) {
+    valor_parcial = 400;
+  } else if (quantidade <= 500) {
+    valor_parcial = 701.5;
+  } else if (quantidade <= 800) {
+    valor_parcial = 1100.5;
+  } else if (quantidade <= 2000) {
+    valor_parcial = 1581.1;
+  } else if (quantidade <= 3000) {
+    valor_parcial = 1981.1;
+  } else {
+    valor_parcial = quantidade * 0.33115857 + 1981.1;
+  }
+
+  // Inicializa o valor total com o valor parcial
+  let valor_total = valor_parcial;
+
+  // Cálculo de cada módulo (se marcado) - CORRIGIDO
+  if (modulosSelecionados.agenda) valor_total += valor_parcial * 0.2;
+  if (modulosSelecionados.andamentos) valor_total += valor_parcial * 0.2;
+  if (modulosSelecionados.pedidos) valor_total += valor_parcial * 0.2;
+  if (modulosSelecionados.projetos) valor_total += valor_parcial * 0.3;
+  if (modulosSelecionados.campos) valor_total += valor_parcial * 0.3;
+  if (modulosSelecionados.ged) valor_total += valor_parcial * 0.5;
+
+  // Lógica específica para financeiro - CORRIGIDA
+  if (modulosSelecionados.financeiro) {
+    let valor_financeiro = valor_parcial * 1.1;
+    if (modulosSelecionados.financeiroExterno) {
+      valor_financeiro *= 2; // dobra o valor se financeiro externo estiver marcado
+    }
+    valor_total += valor_financeiro;
+  }
+
+  if (modulosSelecionados.saneamento) valor_total += valor_parcial * 0.4;
+
+  // Lógica específica para desdobramentos - CORRIGIDA
+  if (modulosSelecionados.desdobramentos) {
+    valor_total += quantidade > 1000 ? valor_parcial * 1.2 : valor_parcial;
+  }
+
+  return {
+    valor_parcial: Number(valor_parcial.toFixed(2)),
+    valor_total: Number(valor_total.toFixed(2)),
+  };
+}
+
+// Cálculo de migração CORRIGIDO
 $(document).ready(function () {
   // Calcular migração quando o botão for clicado
   $("#calcular-migracao").on("click", function () {
@@ -37,6 +97,18 @@ $(document).ready(function () {
       $desdobramentos.prop("checked", false);
       $desdobramentos.closest(".module-card").addClass("opacity-50");
     }
+
+    // Recalcular automaticamente se já tiver calculado antes
+    if (!$("#resultado-migracao").hasClass("hidden")) {
+      calcularMigracao();
+    }
+  });
+
+  // Recalcular automaticamente quando mudar qualquer módulo
+  $('input[type="checkbox"][id^="modulo-"]').on("change", function () {
+    if (!$("#resultado-migracao").hasClass("hidden")) {
+      calcularMigracao();
+    }
   });
 });
 
@@ -52,55 +124,62 @@ function calcularMigracao() {
     return;
   }
 
-  // Calcular valor base
-  let valorBase = 0;
-  if (quantidadeProcessos <= 100) {
-    valorBase = quantidadeProcessos * 2.0;
-  } else if (quantidadeProcessos <= 500) {
-    valorBase = quantidadeProcessos * 1.8;
-  } else if (quantidadeProcessos <= 1000) {
-    valorBase = quantidadeProcessos * 1.6;
-  } else {
-    valorBase = quantidadeProcessos * 1.4;
-  }
+  // Obter módulos selecionados - CORRIGIDO
+  const modulosSelecionados = {
+    agenda: $("#modulo-agenda").is(":checked"),
+    pedidos: $("#modulo-pedidos").is(":checked"),
+    campos: $("#modulo-campos").is(":checked"),
+    saneamento: $("#modulo-saneamento").is(":checked"),
+    financeiro: $("#modulo-financeiro").is(":checked"),
+    financeiroExterno: $("#modulo-financeiro-externo").is(":checked"),
+    andamentos: $("#modulo-andamentos").is(":checked"),
+    projetos: $("#modulo-projetos").is(":checked"),
+    ged: $("#modulo-ged").is(":checked"),
+    desdobramentos:
+      $("#modulo-desdobramentos").is(":checked") && quantidadeProcessos > 1000,
+  };
 
-  // Calcular valor dos módulos selecionados
-  let valorModulos = 0;
-  let modulosSelecionados = [];
-
-  Object.keys(modulosMigracao).forEach((moduloKey) => {
-    if ($(`#modulo-${moduloKey}`).is(":checked")) {
-      const modulo = modulosMigracao[moduloKey];
-      valorModulos += valorBase * modulo.valor;
-      modulosSelecionados.push(modulo.nome);
-    }
-  });
-
-  // Aplicar desdobramentos se selecionado e mais de 1000 processos
-  if (
-    $("#modulo-desdobramentos").is(":checked") &&
-    quantidadeProcessos > 1000
-  ) {
-    valorModulos *= 1.2; // +20% para desdobramentos
-  }
-
-  const valorTotal = valorBase + valorModulos;
+  // Calcular usando a função corrigida - CORRIGIDO
+  const resultado = calcularValorTotal(
+    quantidadeProcessos,
+    modulosSelecionados
+  );
 
   // Atualizar DOM
   $("#resumo-quantidade").text(quantidadeProcessos.toLocaleString("pt-BR"));
   $("#resumo-valor-parcial").text(
-    `R$ ${valorBase.toFixed(2).replace(".", ",")}`
+    `R$ ${resultado.valor_parcial.toFixed(2).replace(".", ",")}`
   );
   $("#resumo-valor-total").text(
-    `R$ ${valorTotal.toFixed(2).replace(".", ",")}`
+    `R$ ${resultado.valor_total.toFixed(2).replace(".", ",")}`
   );
 
-  // Atualizar módulos selecionados
+  // Atualizar módulos selecionados - CORRIGIDO
   const $resumoModulos = $("#resumo-modulos");
   $resumoModulos.empty();
 
-  if (modulosSelecionados.length > 0) {
-    modulosSelecionados.forEach((modulo) => {
+  const modulosNomes = [];
+  if (modulosSelecionados.agenda) modulosNomes.push("Agenda");
+  if (modulosSelecionados.andamentos) modulosNomes.push("Andamentos");
+  if (modulosSelecionados.pedidos) modulosNomes.push("Pedidos dos Processos");
+  if (modulosSelecionados.projetos) modulosNomes.push("Projetos Consultivos");
+  if (modulosSelecionados.campos) modulosNomes.push("Campos Personalizados");
+  if (modulosSelecionados.ged) modulosNomes.push("GED");
+
+  // Lógica específica para financeiro - CORRIGIDA
+  if (modulosSelecionados.financeiro) {
+    if (modulosSelecionados.financeiroExterno) {
+      modulosNomes.push("Financeiro + Externo");
+    } else {
+      modulosNomes.push("Financeiro");
+    }
+  }
+
+  if (modulosSelecionados.saneamento) modulosNomes.push("Saneamento");
+  if (modulosSelecionados.desdobramentos) modulosNomes.push("Desdobramentos");
+
+  if (modulosNomes.length > 0) {
+    modulosNomes.forEach((modulo) => {
       const badge = $(`
         <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
           ${modulo}
@@ -116,6 +195,12 @@ function calcularMigracao() {
 
   // Mostrar resultado
   $("#resultado-migracao").removeClass("hidden");
+
+  // Efeito visual de atualização
+  $("#resumo-valor-total").addClass("highlight-update");
+  setTimeout(() => {
+    $("#resumo-valor-total").removeClass("highlight-update");
+  }, 1000);
 }
 
 function calcularROIMigracao() {
@@ -149,3 +234,18 @@ function calcularROIMigracao() {
   // Mostrar resultado
   $("#resultado-roi").removeClass("hidden");
 }
+
+// Adicionar CSS para o efeito visual
+const style = document.createElement("style");
+style.textContent = `
+  .highlight-update {
+    animation: highlight-pulse 1s ease-in-out;
+  }
+  
+  @keyframes highlight-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+`;
+document.head.appendChild(style);
