@@ -110,19 +110,33 @@ $(document).ready(function () {
     const valorAdicionais = plan.implementation;
 
     // Atualizar DOM
-    $("#valor-plano-base").text(`R$ ${plan.basePrice.toFixed(2)}`);
+    $("#valor-plano-base").text(
+      `R$ ${plan.basePrice.toFixed(2).replace(".", ",")}`
+    );
     $("#valor-usuarios-adicionais").text(
-      `R$ ${valorUsuariosAdicionais.toFixed(2)}`
+      `R$ ${valorUsuariosAdicionais.toFixed(2).replace(".", ",")}`
     );
-    $("#valor-pushs-adicionais").text(`R$ ${valorPushsAdicionais.toFixed(2)}`);
-    $("#valor-oabs-adicionais").text(`R$ ${valorOabsAdicionais.toFixed(2)}`);
-    $("#valor-ged-adicional").text(`R$ ${valorGedAdicional.toFixed(2)}`);
-    $("#valor-jurisai-tokens").text(`R$ ${jurisaiTokens.toFixed(2)}`);
+    $("#valor-pushs-adicionais").text(
+      `R$ ${valorPushsAdicionais.toFixed(2).replace(".", ",")}`
+    );
+    $("#valor-oabs-adicionais").text(
+      `R$ ${valorOabsAdicionais.toFixed(2).replace(".", ",")}`
+    );
+    $("#valor-ged-adicional").text(
+      `R$ ${valorGedAdicional.toFixed(2).replace(".", ",")}`
+    );
+    $("#valor-jurisai-tokens").text(
+      `R$ ${jurisaiTokens.toFixed(2).replace(".", ",")}`
+    );
     $("#valor-captura-processos").text(
-      `R$ ${valorCapturaProcessos.toFixed(2)}`
+      `R$ ${valorCapturaProcessos.toFixed(2).replace(".", ",")}`
     );
-    $("#valor-total-mensal").text(`R$ ${valorTotalMensal.toFixed(2)}`);
-    $("#valor-adicionais").text(`R$ ${valorAdicionais.toFixed(2)}`);
+    $("#valor-total-mensal").text(
+      `R$ ${valorTotalMensal.toFixed(2).replace(".", ",")}`
+    );
+    $("#valor-adicionais").text(
+      `R$ ${valorAdicionais.toFixed(2).replace(".", ",")}`
+    );
 
     // Calcular e exibir recomendação de plano
     updateRecomendacaoPlano(valorTotalMensal);
@@ -188,7 +202,7 @@ $(document).ready(function () {
         // Recomendação é MAIS BARATA que o custo atual - ECONOMIA REAL
         const economia = Math.abs(diferenca);
         $("#detalhe-recomendacao").text(
-          `Economia de R$ ${economia.toFixed(2)} por mês`
+          `Economia de R$ ${economia.toFixed(2).replace(".", ",")} por mês`
         );
         $("#recomendacao-plano").css(
           "background-color",
@@ -197,9 +211,9 @@ $(document).ready(function () {
       } else if (diferenca > 0) {
         // Recomendação é MAIS CARA que o custo atual - CUSTO ADICIONAL
         $("#detalhe-recomendacao").text(
-          `Custo adicional: R$ ${diferenca.toFixed(
-            2
-          )}/mês (melhor custo-benefício)`
+          `Custo adicional: R$ ${diferenca
+            .toFixed(2)
+            .replace(".", ",")}/mês (melhor custo-benefício)`
         );
         $("#recomendacao-plano").css(
           "background-color",
