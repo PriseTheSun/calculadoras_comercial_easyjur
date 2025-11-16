@@ -1,3 +1,4 @@
+// resumo.js
 // Inicialização da aba de Resumo
 document.addEventListener("DOMContentLoaded", function () {
   // Atualizar resumo quando a aba for aberta

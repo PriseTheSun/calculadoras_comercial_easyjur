@@ -13,6 +13,10 @@ $(".tab-btn").on("click", function () {
 
 // Validação de campos numéricos
 $(document).ready(function () {
+  // Aplicar máscaras jQueryMask
+  $(".numeric").mask("000");
+  $(".currency").mask("000,00", { reverse: true });
+
   // Função para mostrar erro no campo
   function showFieldValidation(field, message) {
     // Remove estilos e mensagens anteriores
@@ -44,11 +48,11 @@ $(document).ready(function () {
   }
 
   // Validação em tempo real para limitar caracteres
-  $('input[type="number"]').on("input", function () {
+  $('input[type="text"].numeric').on("input", function () {
     var maxLength = 10;
     var value = $(this).val();
 
-    // Remove caracteres não numéricos
+    // Remove caracteres não numéricos (já tratado pela mask, mas reforçando)
     value = value.replace(/\D/g, "");
 
     // Limita o número de caracteres
@@ -93,15 +97,28 @@ $(document).ready(function () {
     }
   });
 
+  // Permitir somente números durante a digitação
+  $("#ged-adicional").on("input", function () {
+    this.value = this.value.replace(/\D/g, ""); // remove qualquer caractere não numérico
+  });
+
   // Validação do campo de GED adicional
   $("#ged-adicional").on("blur", function () {
     var value = $(this).val();
     var numericValue = parseInt(value) || 0;
 
-    if (numericValue > 500) {
-      $(this).val("500");
-      showFieldValidation(this, "O número máximo de GB adicionais é 500");
+    if (numericValue > 1000) {
+      $(this).val("1000");
+      showFieldValidation(
+        this,
+        "O número máximo de GB adicionais é 1000 equivalente a 1 TB"
+      );
     }
+  });
+
+  // Permitir somente números durante a digitação
+  $("#processos-quantidade").on("input", function () {
+    this.value = this.value.replace(/\D/g, "");
   });
 
   // Validação do campo de quantidade de processos
@@ -109,22 +126,29 @@ $(document).ready(function () {
     var value = $(this).val();
     var numericValue = parseInt(value) || 0;
 
-    if (numericValue > 9999) {
-      $(this).val("9999");
-      showFieldValidation(this, "O número máximo de processos é 9999");
+    if (numericValue > 50000) {
+      $(this).val("50000");
+      showFieldValidation(this, "O número máximo de processos é 50.000");
     }
   });
 
   // Validação do campo de quantidade de processos na migração
+
+  // Permitir somente números
+  $("#quantidade-processos").on("input", function () {
+    this.value = this.value.replace(/\D/g, ""); // só deixa números
+  });
+
+  // Validação no blur
   $("#quantidade-processos").on("blur", function () {
     var value = $(this).val();
     var numericValue = parseInt(value) || 0;
 
-    if (numericValue > 99999) {
-      $(this).val("99999");
+    if (numericValue > 50000) {
+      $(this).val("50000");
       showFieldValidation(
         this,
-        "O número máximo de processos para migração é 99999"
+        "O número máximo de processos para migração é 50.000"
       );
     }
   });

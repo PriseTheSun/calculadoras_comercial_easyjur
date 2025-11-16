@@ -1,4 +1,6 @@
-// Dados dois módulos de migração - ATUALIZADO com os valores corretos
+// migracao.js
+
+// Dados dos módulos de migração - ATUALIZADO com os valores corretos
 const modulosMigracao = {
   agenda: { nome: "Agenda", valor: 0.2 },
   pedidos: { nome: "Pedidos dos Processos", valor: 0.2 },
@@ -24,19 +26,26 @@ function calcularValorTotal(quantidade, modulosSelecionados) {
     };
   }
 
-  // Definição do valor parcial (apenas para quantidade > 0)
-  if (quantidade <= 200) {
-    valor_parcial = 400;
-  } else if (quantidade <= 500) {
-    valor_parcial = 701.5;
-  } else if (quantidade <= 800) {
-    valor_parcial = 1100.5;
-  } else if (quantidade <= 2000) {
-    valor_parcial = 1581.1;
-  } else if (quantidade <= 3000) {
-    valor_parcial = 1981.1;
-  } else {
-    valor_parcial = quantidade * 0.33115857 + 1981.1;
+  // Definição do valor parcial (apenas para quantidade > 0) - USANDO SWITCH
+  switch (true) {
+    case quantidade <= 200:
+      valor_parcial = 400;
+      break;
+    case quantidade <= 500:
+      valor_parcial = 701.5;
+      break;
+    case quantidade <= 800:
+      valor_parcial = 1100.5;
+      break;
+    case quantidade <= 2000:
+      valor_parcial = 1581.1;
+      break;
+    case quantidade <= 3000:
+      valor_parcial = 1981.1;
+      break;
+    default:
+      valor_parcial = quantidade * 0.33115857 + 1981.1;
+      break;
   }
 
   // Inicializa o valor total com o valor parcial
