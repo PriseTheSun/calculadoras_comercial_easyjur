@@ -66,7 +66,7 @@ function calcularValorTotal(quantidade, modulosSelecionados) {
   if (modulosSelecionados.saneamento) valor_total += valor_parcial * 0.4;
 
   if (modulosSelecionados.desdobramentos) {
-    valor_total += quantidade > 1000 ? valor_parcial * 1.2 : valor_parcial;
+    valor_total += valor_parcial * 1.2;
   }
 
   return {
@@ -81,20 +81,12 @@ $(document).ready(function () {
 
   $("#quantidade-processos").on("input", function () {
     const quantidade = parseInt($(this).val()) || 0;
-    const $desdobramentos = $("#modulo-desdobramentos");
 
-    if (quantidade > 1000) {
-      $desdobramentos
-        .prop("disabled", false)
-        .closest(".module-card")
-        .removeClass("opacity-50");
-    } else {
-      $desdobramentos
-        .prop("disabled", true)
-        .prop("checked", false)
-        .closest(".module-card")
-        .addClass("opacity-50");
-    }
+    const $desdobramentos = $("#modulo-desdobramentos");
+    $desdobramentos
+      .prop("disabled", false)
+      .closest(".module-card")
+      .removeClass("opacity-50");
 
     if (!$("#resultado-migracao").hasClass("hidden")) calcularMigracao();
   });
@@ -126,8 +118,7 @@ function calcularMigracao() {
     andamentos: $("#modulo-andamentos").is(":checked"),
     projetos: $("#modulo-projetos").is(":checked"),
     ged: $("#modulo-ged").is(":checked"),
-    desdobramentos:
-      $("#modulo-desdobramentos").is(":checked") && quantidadeProcessos > 1000,
+    desdobramentos: $("#modulo-desdobramentos").is(":checked"),
   };
 
   const resultado = calcularValorTotal(
