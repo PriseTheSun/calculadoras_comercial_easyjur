@@ -1,4 +1,3 @@
-// resumo.js - CORRIGIDO
 document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector('[data-tab="resumo"]')
@@ -277,10 +276,8 @@ function atualizarResumoConsolidado() {
 }
 
 function gerarPropostaPDF() {
-  // Garante que o resumo esteja atualizado antes de gerar o PDF
   atualizarResumoGeral();
 
-  // === COLETA DE DADOS ===
   const dados = {
     plano: verificarDadosPlano() ? coletarDadosPlano() : null,
     migracao: verificarDadosMigracao() ? coletarDadosMigracao() : null,
@@ -357,7 +354,6 @@ function gerarPropostaPDF() {
     return document.querySelector(`#${id} span:last-child`).textContent;
   }
 
-  // === HTML DO PDF ===
   const htmlPDF = `
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -763,7 +759,6 @@ function gerarPropostaPDF() {
 </html>
   `;
 
-  // === ABRE JANELA E IMPRIME ===
   const printWindow = window.open("", "_blank");
   printWindow.document.write(htmlPDF);
   printWindow.document.close();
@@ -772,7 +767,6 @@ function gerarPropostaPDF() {
     setTimeout(() => {
       printWindow.focus();
       printWindow.print();
-      // printWindow.close(); // Opcional: fechar após impressão
     }, 600);
   };
 }

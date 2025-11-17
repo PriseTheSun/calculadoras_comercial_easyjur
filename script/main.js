@@ -113,7 +113,7 @@ $(document).ready(function () {
   });
 
   $("#quantidade-processos").on("input", function () {
-    this.value = this.value.replace(/\D/g, ""); // só deixa números
+    this.value = this.value.replace(/\D/g, "");
   });
 
   $("#quantidade-processos").on("blur", function () {

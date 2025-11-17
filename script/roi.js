@@ -1,4 +1,3 @@
-// roi.js - Cálculo de ROI (Eficiência de Tempo) - Versão Corrigida e Final
 $(document).ready(function () {
   const $quantidade = $("#roi-quantidade-processos");
   const $tempoMedio = $("#roi-tempo-medio");
@@ -29,7 +28,6 @@ $(document).ready(function () {
     }, 4000);
   }
 
-  // === SEMPRE garante número inteiro sem casas decimais ===
   function formatarNumero(valor) {
     return Number.parseInt(valor, 10).toLocaleString("pt-BR");
   }
@@ -46,7 +44,6 @@ $(document).ready(function () {
 
     const totalMinutos = quantidade * tempoPorProcesso;
 
-    // Sempre inteiros
     const totalHoras = Math.round(totalMinutos / 60);
     const totalDias = Math.round(totalHoras / 8);
 
@@ -63,7 +60,6 @@ $(document).ready(function () {
     }
   }
 
-  // === MÁSCARAS ===
   $quantidade.mask("000000");
   $tempoMedio.mask("00");
 
